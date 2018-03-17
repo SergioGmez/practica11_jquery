@@ -1,0 +1,11 @@
+CACHE MANIFEST
+js/jquery.js
+js/bootstrap.min.js
+js/BaseException.js
+css/bootstrap.min.css
+css/shop-homepage.css
+imagenes/
+
+NETWORK:
+*
+index.html

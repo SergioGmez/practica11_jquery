@@ -1,0 +1,122 @@
+var data ={
+       "categories":[{
+           "title": "Ropa",
+           "description": "Todo tipo de ropa"
+         }, {
+           "title": "Tecnologia",
+           "description": "Todo tipo de aparato electrónico"
+         }, {
+           "title":"Libros",
+           "description": "Todo lo relacionado con la lectura"
+         }
+      ],
+      "products":[{
+           "serialNumber": 1111,
+            "name": "Camiseta",
+            "price": 19.99,
+            "description": "Camiseta roja para hombres",
+            "tax": 3,
+            "images":[
+                    "imagenes/camiseta_roja.jpg"
+            ]
+         }, {
+            "serialNumber": 2222,
+            "name": "Portatil",
+            "price": 321.99,
+            "description": "HP - BS017 - i5 - 15.6",
+            "tax": 4,
+            "images": [
+                   "imagenes/portatil.jpg"
+             ]
+         }, {
+            "serialNumber": 3333,
+            "name": "Zapatos",
+            "price": 321.99,
+            "description": "Zapatos Hugo Boss",
+            "tax": 4,
+            "images": [
+                   "imagenes/zapatos.jpg"
+             ]
+         }, {
+            "serialNumber": 4444,
+            "name": "Vaqueros",
+            "price": 16.99,
+            "description": "Vaquero Pepe Jeans Soho Z63",
+            "tax": 5,
+            "images": [
+                    "imagenes/vaqueros.jpg"
+             ]
+         }, {
+            "serialNumber": 5555,
+            "name": "Movil",
+            "price": 189.49,
+            "description": "Móvil Huawei P8 Lite - Negro",
+            "tax": 5,
+            "images": [
+                  "imagenes/movil.jpg"
+            ]
+         }, {
+            "serialNumber": 6666,
+            "name": "ESDLA",
+            "price": 20,
+            "description": "La comunidad del anillo (tapa dura)",
+            "tax": 6,
+            "pages": 576,
+            "images": [
+                  "imagenes/esdla.jpg"
+            ]
+            
+         }, {
+            "serialNumber": 7777,
+            "name": "TV1",
+            "price": 1450,
+            "description": "WXGA LED HD",
+            "tax": 6,
+            "inches": 48,
+            "images": [
+                  "imagenes/tv.jpg"
+            ]
+         }              
+      ],
+      "shops":[{
+           "cif": 1234,
+           "name": "Shop1",
+           "direction": "C/ San Marcos N32",
+           "phone": 123456789,
+           "coord": {
+               "latitude": 14,
+               "longitude": 68
+           }
+         }, {
+           "cif": 4321,
+           "name": "Shop2",
+           "direction": "C/ Calle1 N2",
+           "phone": 987654321,
+           "coord": {
+               "latitude": 14,
+               "longitude": 68
+           }
+         }, {
+           "cif": 6221,
+           "name": "Shop3",
+           "direction": "C/ Calle Falsa N74",
+           "phone": 282822110,
+           "coord": {
+               "latitude": 14,
+               "longitude": 68
+           }
+         }
+      ],
+      "coords":[{
+           "longitude": 38.98375,
+           "latitude": -3.928195
+         }, {
+           "longitude": 38.984818,
+           "latitude": -3.930234
+         }, {
+           "longitude": 38.98767,
+           "latitude": -3.926618
+         }, 
+      ]
+};
+   
