@@ -178,35 +178,43 @@ function shopPopulate(shop, erp){
            productShopPopulate(divSct1, shop.products[i]); 
         }
         
-        var divcol = $("<div>").attr({
-            "class" : "col-sm-4 col-lg-4 col-md-4",
-            "id" : "paperbin"
-        });
-        
-        divcol.css({
-            position: "fixed",
-            bottom: 0,
-            right: 0
-        })
+        if(document.cookie){
+             var divcol = $("<div>").attr({
+                "class" : "col-sm-4 col-lg-4 col-md-4",
+                "id" : "paperbin"
+            });
 
+            divcol.css({
+                position: "fixed",
+                bottom: 0,
+                right: 0
+            })
 
-        //divcol.droppable({drop: paperbin(event, shop)});
-        //divcol.droppable({drop: paperbin(event, shop)});
-        //divcol.ondragover = allowDrop(event,shop);
-        
-        var img = $("<img>").attr({
-            "src": "imagenes/papelera.png",
-            "class": "pull-right"
-        });
-        img.css({
-            width: "20%",
-            maxwidth: "100%"
-        })
-        
-        divcol.append(img);
-        divSct1.append(divcol);
-        
-        menuCategoryShopPopulate(shop, erp);
+            divcol.on( "dragover", function(event) {
+               event.preventDefault();
+            });
+             divcol.on( "drop", function(event) {
+               event.preventDefault();
+              var data = event.originalEvent.dataTransfer.getData("text");
+              var pro = new Product(parseInt(data), "a", 1);
+              sh.removeProduct(pro);
+              document.getElementById(data).remove();
+            });
+
+            var img = $("<img>").attr({
+                "src": "imagenes/papelera.png",
+                "class": "pull-right"
+            });
+            img.css({
+                width: "20%",
+                maxwidth: "100%"
+            })
+
+            divcol.append(img);
+            divSct1.append(divcol);
+
+            menuCategoryShopPopulate(shop, erp);
+            }
    }
 }
 
@@ -359,10 +367,15 @@ function productShopPopulate(element, product){
         var divCol = $("<div>").attr("class", "col-sm-4 col-lg-4 col-md-4");
 
         var divThumb = $("<div>").attr({"class": "thumbnail", id: product.product.serialNumber});
-        //divThumb.draggable();
-        divThumb.ondragstart = dragstart(event);
-        divThumb.ondragover = allowDrop(event);
-
+        divThumb.attr('draggable','true');
+    
+        divThumb.on( "dragstart", function(event) {
+          event.originalEvent.dataTransfer.setData("text", event.target.id);         
+        });
+        divThumb.on( "dragover", function(event) {
+           event.preventDefault();       
+        });
+    
         var img = $("<img>").attr("src", product.product.images[0]);
         divThumb.append(img);
 
@@ -506,31 +519,6 @@ function initMap(){
         shop = shops.next();
     }
 }
-
-function paperbin(event,shop){
-  return function(event){
-      event.preventDefault();
-      var data = event.dataTransfer.getData("text");
-      var pro = new Product(parseInt(data), "a", 1)
-      sh.removeProduct(pro);
-      document.getElementById(data).remove();
-  } 
-    
-}
-
-
-function dragstart(event){
-    return function(event){
-       event.dataTransfer.setData("text", event.target.id);
-  }      
-}
-
-function allowDrop(event){
-    return function(event){
-       event.preventDefault();
-  }      
-}
-
 
  var listWindows = [];
  var sh = new StoreHouse();

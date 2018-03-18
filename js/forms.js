@@ -76,7 +76,7 @@ function createSelect(form, type, name, lab){
         category = categories.next();
         
         while (category.done !== true){
-             option = $("<option>").text(category.value.title);
+             var option = $("<option>").text(category.value.title);
              option.attr("value", category.value.title);
              select.append(option);
             
@@ -325,8 +325,6 @@ function addShopForm(){
                         if (cif == "" || name == ""){
                              throw new EmptyValueException();
                         } else {
-                             console.log(lat);
-                             console.log(lng);
                              var coord = new Coords(lat, lng);
                              var shop = new Shop(cif, name, coord);
                              sh.addShop(shop);
@@ -484,8 +482,6 @@ function updShopForm(){
 }
 
 
-
-
 function delShopForm(){
     
         function delShop(){
@@ -555,16 +551,18 @@ function addProForm(){
     
     function addPro(){
       return function (){
-            var serial = $('input[name="SerialNumber"]').val();
+            var serial = parseInt($('input[name="SerialNumber"]').val());
             var name = $('input[name="Name"]').val();
             var description = $('input[name="Description"]').val();
             var price = parseInt($('input[name="Price"]').val());
-            var tax = parseInt($('input[name="Tax"]').val());
+            var tax = $('input[name="Tax"]').val();
             var stock = parseInt($('input[name="Stock"]').val());
-            var titCat = parseInt($('input[name="selectCat"]').val());
-            var cifShop = parseInt($('input[name="selectShop"]').val());
+            var titCat = $('select[name="selectCat"]').val();
+            var cifShop = parseInt($('select[name="selectShop"]').val());
             var cat;
             var sho;
+          
+          console.log(titCat);
 
             try{
                if (serial == "" || name == ""){
@@ -579,7 +577,7 @@ function addProForm(){
                     var category = categories.next();
                     
                     while (category.done !== true){
-                        if (category.value.title == titCat){
+                        if (category.value.title === titCat){
                             cat = category.value;
                         }
 
@@ -597,7 +595,7 @@ function addProForm(){
                     var shop = shops.next();
 
                     while (shop.done !== true){
-                         if (shop.value.cif == cifShop){
+                         if (shop.value.cif === cifShop){
                              sho = shop.value;
                          }
                          shop = shops.next();

@@ -63,7 +63,7 @@ function Product(serialNumberValue, nameValue, priceValue){
             throw new InvalidAccessConstructorException();
 
         if (serialNumberValue === undefined || serialNumberValue === '') throw new EmptyValueException("serialNumber");
-        if (typeof serialNumberValue !== 'number') throw new InvalidValueException("pages",serialNumberValue); 
+        if (typeof serialNumberValue !== 'number') throw new InvalidValueException("serialNumber",serialNumberValue); 
 
         if (nameValue === undefined || nameValue === '') throw new EmptyValueException("name");	
 
@@ -120,7 +120,7 @@ function Product(serialNumberValue, nameValue, priceValue){
             },
             set:function(value){
                 if (value === undefined || value === '') throw new EmptyValueException("price");
-                if (typeof value !== 'number') throw new InvalidValueException("price",value);
+                if (typeof value !== 'number') throw new InvalidValueException("price", value);
                 price = value;
                 updDB(this, "products", serialNumber);
             }		
@@ -189,7 +189,7 @@ function Shirt(serialNumber, name, price, tailValue){
 			},
 			set:function(value){
 				if (typeof tail === undefined) throw new EmptyValueException("tail");
-                if (typeof value !== 'number') throw new InvalidValueException("pages",value);
+                if (typeof value !== 'number') throw new InvalidValueException("tail",value);
 				tail = value;
                 updDB(this, "products", serialNumber);
 			}		

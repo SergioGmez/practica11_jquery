@@ -1,12 +1,5 @@
 function saveObjects (){
-     function sendJson(json, user){
-          var xmlhttp = new XMLHttpRequest();
-                
-          xmlhttp.open("POST", "demo_json.php", true);
-          xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xmlhttp.send("x=" + json + "&user="+user);
-     }
-    
+
    return function (){
        
            var objects = {
@@ -62,7 +55,12 @@ function saveObjects (){
 
            var user = /[^=][a-z]*$/.exec(document.cookie);
            var json = JSON.stringify(objects);
+       
+            $("#sct1").empty();
+            var h3 = $("<h3>").append("Archivo json guardado en la carpeta principal de la web con el nombre de "+user);
+            h3.css("color", "green");
+            $("#sct1").append(h3);
             
-           sendJson(json, user);
+           $.post( "demo_json.php", { json: json, user: user[0] } );  
       }
 }
