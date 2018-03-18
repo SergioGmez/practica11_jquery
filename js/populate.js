@@ -62,7 +62,12 @@ function createObjects(sh){
    var shop3 = new Shop(data.shops[2].cif, data.shops[2].name, coor3);
    shop3.direction = data.shops[2].direction;
    shop3.phone = data.shops[2].phone;
-
+    
+   var shops = sh.shops;
+   var shop = shops.next(); 
+   shop.value.direction = "C/ La Mancha";
+   shop.value.phone = "421212";
+    
    sh.addProduct(pro1, cat1);
    sh.addProduct(pro3, cat1);
    sh.addProduct(pro4, cat1);
@@ -70,7 +75,7 @@ function createObjects(sh){
    sh.addProduct(pro5, cat2);
    sh.addProduct(book, cat3);
    sh.addProduct(tv, cat2);
-    
+
    sh.addProductInShop(pro1, shop1, 32);
    sh.addProductInShop(pro1, shop2, 44);
    sh.addProductInShop(pro2, shop1, 55);
@@ -425,8 +430,7 @@ function openWindows(product){
              listWindows[i].close();
            }
             
-           var cat = document.getElementById("closeWindows");
-           removeChildsElement(cat);
+           $("#closeWindows").empty();
         }
     }
     
@@ -483,6 +487,7 @@ function openWindows(product){
 }
 
 function initMap(){
+
 
     var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 38.984573, lng: -3.927454},

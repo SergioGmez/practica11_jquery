@@ -349,7 +349,9 @@ function StoreHouse(){
 
 		var productShopPosition = getShopProducts(product, shops[shopPosition].products); 	
 		if (productShopPosition === -1){
-            products[productPosition].stockGen =+ num;
+
+            products[productPosition].stockGen =  products[productPosition].stockGen + num;
+            
 			shops[shopPosition].products.push(
                 {
                  product: product,
@@ -587,6 +589,4 @@ function StoreHouse(){
     var coord = new Coords(14, 68);
 	var defaultShop = new Shop("0123", "General", coord);
     shops.push(defaultShop);
-	//this.addShop(defaultShop);
-
 }

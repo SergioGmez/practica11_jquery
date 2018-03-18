@@ -19,9 +19,10 @@ function Category(titleValue){
 		},
 		set:function(value){
 			title = title.trim();
-			if (title === undefined || title === null) throw new EmptyValueException("title");					
+			if (title === undefined || title === null) throw new EmptyValueException("title");	
+
 			title = value;
-            updDB(this, "categories", title);
+            
 		}		
 	});		
 	
@@ -30,9 +31,9 @@ function Category(titleValue){
 			return description;
 		},
 		set:function(value){
-			if (value === undefined) throw new EmptyValueException("description");	
+			if (value === undefined) throw new EmptyValueException("description");
+            
 			description = value;
-            updDB(this, "categories", title);
 		}		
 	});
     

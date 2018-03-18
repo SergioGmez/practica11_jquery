@@ -1,9 +1,9 @@
 function startDB(obj){
-            
-     var request = indexedDB.open("store", 1);
+     window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;       
+     var request =  window.indexedDB.open("store", 1);
 
-     request.onupgradeneeded = function (e) {
-         db = event.target.result;
+     request.onupgradeneeded = function (e){
+         db = e.target.result;
 
          var objectStore = db.createObjectStore("products");
          objectStore = db.createObjectStore("categories");  
@@ -17,7 +17,7 @@ function startDB(obj){
        };
 
        request.onerror = function (e){
-            alert('Error cargando la base de datos');
+            console.log('Error cargando la base de datos');
        };
 };
     
@@ -42,7 +42,6 @@ function updDB(obj, store, key){
       var objectStore = transaction.objectStore(store); 
       var request = objectStore.put(obj.getObject(), key);
   
-    
       request.onsuccess = function(event) {
           //console.log("Objeto actualizado: "+key);
       };
@@ -67,19 +66,6 @@ function delDB(obj, store, key){
           //console.log("Error al eliminado objeto");
       };
 }
-
-function deleteDB(){
-    var DBDeleteRequest = window.indexedDB.deleteDatabase("store");
-
-    DBDeleteRequest.onerror = function(event) {
-      console.log("Error deleting database.");
-    };
-
-    DBDeleteRequest.onsuccess = function(event) {
-      console.log("Database deleted successfully");
-    };
-}
-
 startDB();
-//deleteDB();
+
  

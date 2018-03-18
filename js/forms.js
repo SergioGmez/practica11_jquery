@@ -1,17 +1,18 @@
 
-function createInput(labelIn, inputName, form){
+function createInput(labelIn, inputName, form, ph){
         var dv = $("<div>").attr("class", "form-group");
         
         var label = $("<label>").attr("class", "control-label col-sm-2");
         label.text(labelIn);
         dv.append(label);
                 
-        var dv1 = $("<div>").attr("class", "col-sm-4");
+        var dv1 = $("<div>").attr("class", "col-sm-5");
           
         var input = $("<input>").attr({
             "class": "form-control",
             "type": "text",
-            "name": inputName
+            "name": inputName,
+            placeholder: ph
         });
                 
         dv1.append(input);
@@ -19,7 +20,7 @@ function createInput(labelIn, inputName, form){
         form.append(dv);
 }
         
- function textArea(form){
+ function textArea(form, ph){
         
         var dv = $("<div>").attr("class", "form-group");
      
@@ -27,12 +28,13 @@ function createInput(labelIn, inputName, form){
         label.text("Descripción");
         dv.append(label);
                 
-        var dv1 = $("<div>").attr("class", "col-sm-4");
+        var dv1 = $("<div>").attr("class", "col-sm-5");
      
         var input = $("<textarea>").attr({
             "class": "form-control",
             "rows": "5",
-            "name": "description"
+            "name": "description",
+            placeholder: ph
         });
 
                 
@@ -44,7 +46,7 @@ function createInput(labelIn, inputName, form){
 function createButton(func, form){
         var dv = $("<div>").attr("class", "form-group");
 
-        var dv1 = $("<div>").attr("class", "col-sm-offset-5");
+        var dv1 = $("<div>").attr("class", "col-sm-offset-6");
     
         var a = $("<a>").text("Enviar");
         a.attr("class", "btn btn-default");
@@ -58,7 +60,7 @@ function createButton(func, form){
 function createSelect(form, type, name, lab){
     var div = $("<div>").attr("class", "form-group");
     
-    var dv1 = $("<div>").attr("class", "col-sm-4");
+    var dv1 = $("<div>").attr("class", "col-sm-5");
     
     var label = $("<label>").attr("class", "control-label col-sm-2");
     label.text(lab);
@@ -159,8 +161,8 @@ function addCategoryForm(){
             label.text("Añadir categoria");
             form.append(label);
                
-            createInput("Title", "title", form);
-            textArea(form);
+            createInput("Title", "title", form, "Introduce el titulo de la categoria");
+            textArea(form, "Introduce una breve descripción de la categoria");
             createButton(addCategory, form);
             
             var p = $("<p>").attr({
@@ -198,9 +200,9 @@ function updCategoryForm(){
                               } 
 
                              if (aux !== -1){
-                                    aux.title = title;
                                     aux.description = description;
-                                 
+                                    aux.title = title;
+                                    updDB(aux, "categories", aux.title);
                                     init = initPopulate(sh);
                                     init();
                              } else {
@@ -233,8 +235,8 @@ function updCategoryForm(){
             label.text("Datos a actualizar: ");
             form.append(label);
             
-            createInput("Titulo", "title", form);
-            textArea(form);
+            createInput("Titulo", "title", form, "Introduce el tituLo de la categoria");
+            textArea(form, "Introduce una breve descripción de la categoria");
             createButton(updCategory, form);
             
             var p = $("<p>").attr({
@@ -355,10 +357,10 @@ function addShopForm(){
             label.text("Añadir tienda");
             form.append(label);
            
-            createInput("CIF", "CIF", form);
-            createInput("Name", "Name", form); 
-            createInput("Direction", "Direction", form); 
-            createInput("Phone", "Phone", form);
+            createInput("CIF", "CIF", form, "Introduce un CIF compuesto solo por números");
+            createInput("Name", "Name", form, "Introduce el nombre de la tienda"); 
+            createInput("Direction", "Direction", form, "Introduce la dirección de la tienda"); 
+            createInput("Phone", "Phone", form, "Introduce el número de telefóno de la tienda");
            
             var dv = $("<div>").attr("class", "form-group");
             var label = $("<label>").attr("class", "control-label col-sm-2");
@@ -391,13 +393,12 @@ function updShopForm(){
           return function (){
                  
                  var cifId = $('select[name="selectPrin"]').val();;
-                 var cif = $('input[name="CIF"]').val();
                  var name = $('input[name="Name"]').val();
                  var direction = $('input[name="Direction"]').val();
                  var phone = $('input[name="Phone"]').val();
               
                  try{
-                     if (cif == "" || cifId == ""){
+                     if (cifId == ""){
                           throw new EmptyValueException();
                      } else {
                           var sp = sh.shops;
@@ -412,7 +413,7 @@ function updShopForm(){
                           }
 
                           if (aux !== -1){
-                                aux.cif = cif;
+        
                                 aux.name = name;
                                 aux.direction = direction;
                                 aux.phone = phone;
@@ -451,10 +452,9 @@ function updShopForm(){
             label.text("Datos a actualizar: ");
             form.append(label);
           
-            createInput("CIF", "CIF", form);
-            createInput("Name", "Name", form); 
-            createInput("Direction", "Direction", form); 
-            createInput("Phone", "Phone", form);
+            createInput("Name", "Name", form, "Introduce el nombre"); 
+            createInput("Direction", "Direction", form, "Introduce la dirección"); 
+            createInput("Phone", "Phone", form, "Introduce el número de telefóno");
           
             var dv = $("<div>").attr("class", "form-group");
             var label = $("<label>").attr("class", "control-label col-sm-2");
@@ -504,7 +504,6 @@ function delShopForm(){
                         }
 
                         if (aux !== -1){
-                            console.log(aux);
                             sh.removeShop(aux);
                             
                             init = initPopulate(sh);
@@ -561,8 +560,7 @@ function addProForm(){
             var cifShop = parseInt($('select[name="selectShop"]').val());
             var cat;
             var sho;
-          
-          console.log(titCat);
+
 
             try{
                if (serial == "" || name == ""){
@@ -627,12 +625,12 @@ function addProForm(){
             label.text("Añadir producto");
             form.append(label);
                 
-            createInput("SerialNumber", "SerialNumber", form);
-            createInput("Name", "Name", form); 
-            createInput("Description", "Description", form); 
-            createInput("Price", "Price", form);
-            createInput("Tax", "Tax", form);
-            createInput("Stock", "Stock", form);
+            createInput("SerialNumber", "SerialNumber", form, "Introduce un serial compuesto solo por números");
+            createInput("Name", "Name", form, "Introduce el nombre"); 
+            createInput("Description", "Description", form, "Introduce la descripción"); 
+            createInput("Price", "Price", form, "Introduce el precio");
+            createInput("Tax", "Tax", form, "Introduce el tax");
+            createInput("Stock", "Stock", form, "Introduce el stock en la tienda");
            
             createSelect(form, "Categories", "selectCat", "Añadir producto a categoria");
             createSelect(form, "Shops", "selectShop", "Añadir producto a tienda");
